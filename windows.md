@@ -41,3 +41,13 @@ Fontes:
 
 Fontes:
 * [ISAID](http://ishamsaid.tumblr.com/post/54171162216/enable-hibernate-in-windows-8-1-start-right-click-pop)
+
+## Computador não desliga corretamente
+Alguns computadores não estão desligando corretamente no windows 8.1. O computador desliga, mas os leds continuam ativos e o computador não pode ser ligado antes de forçar o seu desligamento. Aparentemente, esse problema é causado por algum erro no "Hybrid Shutdown" (semi-hibernado). Para desativar essa funcionalidade:
+1. Abrir o "executar" com `Win + R` e abrir as opções de enegria `powercfg.cpl`
+2. No menu lateral esquerdo, selecionar a opção `Escolher a função dos botões de energia`
+3. Selecionar `Alterar configurações não disponíveis no momento`
+4. Abaixo, em `Configurações de desligamento`, desabilitar a opção `Ligar inicialização rápida (recomendado)`
+
+Fontes:
+* [AskVG](http://www.askvg.com/fix-windows-8-restart-and-shutdown-problems-by-disabling-hybrid-shutdown-feature/)
