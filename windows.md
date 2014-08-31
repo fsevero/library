@@ -29,6 +29,7 @@ Fontes:
 ## Iniciar o Windows diretamente na área de trabalho
 1. Clicar com o botão direito na barra de tarefas e selecionar `Propriedades`
 2. Na aba `Navegação`, marcar a opção `Quando eu entrar ou fechar todos os aplicativos em uma tela, ir para a área de trabalho em vez de Iniciar`
+
 Fontes:
 * [Fórum de usuários da HP](http://h30487.www3.hp.com/t5/Dicas-dos-Experts-para-notebooks/Como-tirar-a-senha-de-inicializa%C3%A7%C3%A3o-do-Windows-8-e-8-1/td-p/390869)
 
