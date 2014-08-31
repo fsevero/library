@@ -29,6 +29,14 @@ Fontes:
 ## Iniciar o Windows diretamente na área de trabalho
 1. Clicar com o botão direito na barra de tarefas e selecionar `Propriedades`
 2. Na aba `Navegação`, marcar a opção `Quando eu entrar ou fechar todos os aplicativos em uma tela, ir para a área de trabalho em vez de Iniciar`
+Fontes:
+* [Fórum de usuários da HP](http://h30487.www3.hp.com/t5/Dicas-dos-Experts-para-notebooks/Como-tirar-a-senha-de-inicializa%C3%A7%C3%A3o-do-Windows-8-e-8-1/td-p/390869)
+
+## Habilitar Hibernação (e outras opções ausentes)
+1. Abrir o "executar" com `Win + R` e abrir as opções de enegria `powercfg.cpl`
+2. No menu lateral esquerdo, selecionar a opção `Escolher a função dos botões de energia`
+3. Selecionar `Alterar configurações não disponíveis no momento`
+4. Abaixo, em `Configurações de desligamento`, habilitar as opções desejadas
 
 Fontes:
-* [Fórum de usuários da HP](http://h30487.www3.hp.com/t5/Dicas-dos-Experts-para-notebooks/Iniciar-Windows-8-1-direto-na-%C3%A1rea-de-trabalho/td-p/389389)
+* [ISAID](http://ishamsaid.tumblr.com/post/54171162216/enable-hibernate-in-windows-8-1-start-right-click-pop)
