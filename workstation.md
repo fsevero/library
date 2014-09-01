@@ -43,7 +43,7 @@ Be sure to add Git to your `PATH` system variable, if chocolatey didn't. Add the
 
 
 ## Installing VirtualBox
-I'm installing version 4.2 of VirtualBox due to incompatibility with the last version of Vagrant
+I'm installing version 4.2 of VirtualBox due to [incompatibility with the last version of Vagrant](http://stackoverflow.com/questions/19689632/vagrant-errors-after-windows-8-1-update)
 ```shell
 choco install Devbox-VirtualBox
 ```
