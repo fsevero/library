@@ -8,3 +8,4 @@ Personal library, containing guides, tutorials and information useful that I oft
 * [Instalação e configuração do Windows 8 (PT-BR)](windows.md)
 * [Vagrant Base Box (from Torchbox)](https://github.com/fsevero/vagrant-django-base)
 * [Workstation](workstation.md)
+* [Working with Django and Heroku](django.md)
