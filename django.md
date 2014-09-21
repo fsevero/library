@@ -1,65 +1,146 @@
-'''shell
-mkdir project
-cd project
+# Working on Django with Heroku
+
+Preparation of the development environment according to my [Workstation](worstation.md)
+
+```shell
+mkdir project_name
+cd project_name
 mkdir shared
 vagrant init django-base-v2.1
-'''
+```
 
-'''shell
+Edit the `Vagrantfile` and add those two lines for portforwarding and a shared folder:
+
+```ruby
 config.vm.network "forwarded_port", guest: 8000, host: 8080
-config.vm.synced_folder "shared_folder", "/home/vagrant/shared_folder"
-'''
+config.vm.synced_folder "shared", "/home/vagrant/shared"
+```
 
-'''shell
+Startup the VM:
+
+```shell
 vagrant up
 vagrant ssh
-'''
+```
 
-'''shell
+Before starting to work, update the system, configure git and install [Heroku Toolbelt](https://toolbelt.heroku.com/), [zsh](http://www.zsh.org/) and [oh-my-zsh](http://ohmyz.sh/):
+
+```shell
+# Updating the system
 sudo apt-get update
 sudo apt-get upgrade
 
+# Git configuration
 git config --global user.email "severo.fabricio@gmail.com"
 git config --global user.name "Severo"
 git config --global push.default upstream
+
+# Heroku Toolbelt (and dependencies)
+sudo apt-get install python-dev python-psycopg2 libpq-dev
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 # Installing Oh-My-Zsh
 sudo apt-get install zsh
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 chsh -s `which zsh`
+# Reboot to apply changes and start with zsh
+```
 
-# reboot
+Starting the project:
 
-# Heroku Toolbelt (dependencies first)
-sudo apt-get install python-dev python-psycopg2 libpq-dev
-wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+```shell
+# Working on the shared folder to edit files on Windows
+cd shared
 
-mkvirtualenv project
+# I do create the virtualenv with the name "shared" so when i enter the folder it will automatically activate (oh-my-zsh plugin)
+mkvirtualenv shared
+
+# Install Django, psycopg2, gunicorn, dj-database-url, dj-static
 pip install django-toolbelt
 
+# Freeze the requirements to Heroku
 pip freeze > requirements.txt
 
-django_admin startproject project .
-'''
+# Start project (Don't forget the dot at the end to create files at the actual directory)
+django_admin startproject project_name .
+```
 
-CONFIGURE SETINGS
-[http://www.marinamele.com/2013/12/how-to-set-django-app-on-heroku-part-i.html]
-[https://devcenter.heroku.com/articles/django-assets]
-[https://devcenter.heroku.com/articles/getting-started-with-python#provision-a-database]
+Some configuration i found at
+["Python, Science and Marketing"](http://www.marinamele.com/2013/12/how-to-set-django-app-on-heroku-part-i.html),
+[Heroku Dev Center (Static files)](https://devcenter.heroku.com/articles/django-assets)
+and [Heroku Dev Center (Python tutorial)](https://devcenter.heroku.com/articles/getting-started-with-python#provision-a-database):
 
-'''shell
+Edit your `settings.py` and add the following configuration:
+
+```python
+import dj_database_url
+# ...
+ALLOWED_HOSTS = ['project_name.herokuapp.com']
+# ...
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Production config (I'm pretty sure there are more intelligent ways of doing that)
+db_config = dj_database_url.config()
+if len(db_config) > 0:
+  DATABASES['default'] = dj_database_url.config()
+```
+
+Edit your `wsgi.py` and add the following configuration:
+
+```python
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_name.settings")
+
+from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())
+```
+
+Create a `Procfile` with the following content:
+```shell
+web: gunicorn financial.wsgi --log-file -
+```
+
+When you are ready to make your first commit/deploy:
+
+```shell
 git init
 git add .
 git commmit -m "First commit"
 
-# ... configure git
+# Configure your git remote
+git remote add origin git@github.com:fsevero/project_name.git
+git push -u origin master
 
 git push
-heroku create
-git push heroku master 
+heroku create project_name
+git push heroku master
 
-# migrations
+# migrations (this can be automated i guess)
 heroku run bash
 
 python manage.py migrate
-'''
+```
+
+Whenever you do some changes and want to publish:
+
+```shell
+git add .
+git commmit -m "commit mesage with change description"
+
+git push
+git push heroku master
+
+# migrations if needed (this can be automated i guess)
+heroku run bash
+
+python manage.py migrate
+```
