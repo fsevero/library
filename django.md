@@ -121,6 +121,7 @@ git remote add origin git@github.com:fsevero/project_name.git
 git push -u origin master
 
 git push
+heroku login
 heroku create project_name
 git push heroku master
 
