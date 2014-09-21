@@ -141,7 +141,5 @@ git push
 git push heroku master
 
 # migrations if needed (this can be automated i guess)
-heroku run bash
-
-python manage.py migrate
+heroku run python manage.py migrate
 ```
