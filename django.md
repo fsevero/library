@@ -63,6 +63,9 @@ pip freeze > requirements.txt
 
 # Start project (Don't forget the dot at the end to create files at the actual directory)
 django_admin startproject project_name .
+mkdir staticfiles
+mkdir static
+touch static/empty
 ```
 
 Some configuration i found at
@@ -125,10 +128,14 @@ heroku login
 heroku create project_name
 git push heroku master
 
-# migrations (this can be automated i guess)
-heroku run bash
+# If not exists, create a folder staticfiles
+heroku run mkdir staticfiles
 
-python manage.py migrate
+#Collect static files
+heroku run python manage.py collectstatic --noinput -n -i empty
+
+# migrations (this can be automated i guess)
+heroku run python manage.py migrate
 ```
 
 Whenever you do some changes and want to publish:
@@ -139,6 +146,9 @@ git commmit -m "commit mesage with change description"
 
 git push
 git push heroku master
+
+# Static files, if needed
+heroku run python manage.py collectstatic --noinput -n -i empty
 
 # migrations if needed (this can be automated i guess)
 heroku run python manage.py migrate
