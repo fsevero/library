@@ -82,7 +82,6 @@ production () {
   heroku maintenance:on;
   git push heroku master;
   heroku run python manage.py migrate;
-  heroku run python manage.py collectstatic --noinput -n -i error;
   heroku maintenance:off;
 }
 ```
@@ -165,9 +164,6 @@ git push heroku master
 
 # If not exists, create a folder staticfiles
 heroku run mkdir staticfiles
-
-#Collect static files
-heroku run python manage.py collectstatic --noinput -n -i empty
 
 # migrations
 heroku run python manage.py migrate
