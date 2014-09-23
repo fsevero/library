@@ -112,6 +112,14 @@ Create a `Procfile` with the following content:
 web: gunicorn financial.wsgi --log-file -
 ```
 
+Create a `.gitignore` with the following content:
+```shell
+*.pyc
+*.sqlite3
+internal_docs/
+staticfiles/
+```
+
 When you are ready to make your first commit/deploy:
 
 ```shell
