@@ -73,6 +73,20 @@ Some configuration i found at
 [Heroku Dev Center (Static files)](https://devcenter.heroku.com/articles/django-assets)
 and [Heroku Dev Center (Python tutorial)](https://devcenter.heroku.com/articles/getting-started-with-python#provision-a-database):
 
+Edit your `postactivate` virtualenv hook (`vim $WORKON_HOME/shared/bin/postactivate`) and make sure to restart the virtual env to get this working:
+```shell
+DJANGO_SETTINGS_MODULE="project_name.dev_settings"
+export DJANGO_SETTINGS_MODULE
+
+production () {
+  heroku maintenance:on;
+  git push heroku master;
+  heroku run python manage.py migrate;
+  heroku run python manage.py collectstatic --noinput -n -i error;
+  heroku maintenance:off;
+}
+```
+
 Edit your `settings.py` and add the following configuration:
 
 ```python
@@ -89,10 +103,23 @@ STATICFILES_DIRS = (
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Production config (I'm pretty sure there are more intelligent ways of doing that)
-db_config = dj_database_url.config()
-if len(db_config) > 0:
-  DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config()
+DEBUG = False
+TEMPLATE_DEBUG = False
+```
+
+Create a `dev_settings.py` together with the `settings.py` with the following content:
+```python
+# -*- coding: utf-8 -*-
+from .settings import *
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 ```
 
 Edit your `wsgi.py` and add the following configuration:
@@ -142,7 +169,7 @@ heroku run mkdir staticfiles
 #Collect static files
 heroku run python manage.py collectstatic --noinput -n -i empty
 
-# migrations (this can be automated i guess)
+# migrations
 heroku run python manage.py migrate
 ```
 
@@ -153,11 +180,7 @@ git add .
 git commmit -m "commit mesage with change description"
 
 git push
-git push heroku master
 
-# Static files, if needed
-heroku run python manage.py collectstatic --noinput -n -i empty
-
-# migrations if needed (this can be automated i guess)
-heroku run python manage.py migrate
+# The function 'production' will trigger the snippet configured at the 'postactivate' hook of the virtual env
+production
 ```
