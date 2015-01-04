@@ -52,3 +52,15 @@ Alguns computadores não estão desligando corretamente no windows 8.1. O comput
 
 Fontes:
 * [AskVG](http://www.askvg.com/fix-windows-8-restart-and-shutdown-problems-by-disabling-hybrid-shutdown-feature/)
+
+## Programar o computador para desligar automaticamente
+1. Pressione `Win + S` para abrir a pesquisa e digite `Agendar tarefas` (ou `Schedule tasks` caso o windows estiver em Inglês)
+2. Clique com o direito e selecione `Executar como administrador`
+3. Na aba `Ações` (`Actions`), selecione `Criar tarefa...` (`Create Task`)
+4. Nomeie a tarefa (Ex: `Desligamento automático`) para facilitar a identificação
+5. Na aba `Disparadores` (`Triggers`), inclua as regras para início da tarefa
+6. Na aba `Ações` (`Actions`), inclua uma ação com o script `shutdown` e os argumentos `/s /f`
+7. Confirme as janelas.
+
+Fontes:
+* [TECHZANE](http://techzane.com/schedule-automatic-shutdown-in-windows-8/)
