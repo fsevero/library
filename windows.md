@@ -1,6 +1,12 @@
 # Windows 8
 Pré/pós preparatórios
 
+## Corrigindo resolução (Programas "embaçados")
+* Clique com o botão direito do mouse na Área de Trabalho e selecione `Personalizar`
+* Acesse o menu `Vídeo` no canto inferior esquerdo da janela que se abriu
+* Selecione `Deixe-me escolher um nível de escala para todos os meus vídeos`
+* Selecione o zoom (`Alterar o tamanho de todos os itens`) que ficar mais adequado ao seu monitor
+
 ## Criação pendrive UEFI
 Em um 'terminal' com privilégios de administrador, seguir o procedimento:
 ```shell
