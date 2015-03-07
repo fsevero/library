@@ -1,6 +1,11 @@
 # Windows 8
 Pré/pós preparatórios
 
+## Observações para RAID 0
+Caso o seu computador possuir um SSD em RAID 0 (aceleração do sistema), será necessário desabilitar a aceleração e "liberar" o disco sólido para uso pelo sistema **ANTES DE FORMATÁ-LO**. 
+Isso é importante para que o Windows não se perca e deixe de reconhecer os discos durante a instalação do sistema.
+Caso a RAID não seja desfeita, o instalador do Windows pode não conseguir identificar/ler/modificar as informações de partições do HD devido a este estar sendo acelerado pelo SSD. Para resolver esse problema será necessário desfazer a RAID manualmente, através da BIOS/UEFI (Não tenho um "tutorial" no momento para solucionar este problema)
+
 ## Corrigindo resolução (Programas "embaçados")
 * Clique com o botão direito do mouse na Área de Trabalho e selecione `Personalizar`
 * Acesse o menu `Vídeo` no canto inferior esquerdo da janela que se abriu
