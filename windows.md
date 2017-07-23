@@ -1,3 +1,14 @@
+# Windows 10
+
+## Impedir que o windows atualize os drivers automaticamente
+* Painel de controle
+* Sistema e Segurança
+* Sistema
+* Configurações avançadas de sistema
+* Harware
+* Configurações de Instalação do Dispositivo
+* Não (o dispositivo poderá não funcionar conforme o esperado)
+
 # Windows 8
 Pré/pós preparatórios
 
