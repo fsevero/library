@@ -9,6 +9,8 @@
 * Configurações de Instalação do Dispositivo
 * Não (o dispositivo poderá não funcionar conforme o esperado)
 
+Fonte: [Pplware](https://pplware.sapo.pt/microsoft/windows/nao-deixe-que-o-windows-10-escolha-que-drivers-instalar/)
+
 # Windows 8
 Pré/pós preparatórios
 
